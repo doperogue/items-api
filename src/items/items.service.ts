@@ -22,4 +22,16 @@ export class ItemsService {
     console.log(item);
     return this.itemsRepository.create(item);
   }
+
+  destroy(id: number): Promise<number> {
+    return this.itemsRepository.destroy({
+      where: { id: id },
+    });
+  }
+
+  update(item: ItemInterface, id: number): Promise<[number, Item[]]> {
+    return this.itemsRepository.update(item, {
+      where: { id: id },
+    });
+  }
 }

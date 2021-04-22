@@ -31,12 +31,15 @@ export class ItemsController {
   }
 
   @Put(':id')
-  edit(@Body() createItem: CreateItemsDto): string {
-    return `Updated item ${createItem.name} - ${createItem.description}`;
+  edit(
+    @Body() createItem: CreateItemsDto,
+    @Param('id') id: number,
+  ): Promise<[number, Item[]]> {
+    return this.itemService.update(createItem, id);
   }
 
   @Delete(':id')
-  delete(@Param() param): string {
-    return `Item ${param.id} deleted`;
+  delete(@Param() param): Promise<number> {
+    return this.itemService.destroy(param.id);
   }
 }
