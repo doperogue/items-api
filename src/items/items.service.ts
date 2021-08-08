@@ -20,17 +20,17 @@ export class ItemsService {
 
   create(item: ItemInterface): Promise<Item> {
     console.log(item);
-    return this.itemsRepository.create(item);
+    return this.itemsRepository.create<Item>(item);
   }
 
   destroy(id: number): Promise<number> {
-    return this.itemsRepository.destroy({
+    return this.itemsRepository.destroy<Item>({
       where: { id: id },
     });
   }
 
   update(item: ItemInterface, id: number): Promise<[number, Item[]]> {
-    return this.itemsRepository.update(item, {
+    return this.itemsRepository.update<Item>(item, {
       where: { id: id },
     });
   }
